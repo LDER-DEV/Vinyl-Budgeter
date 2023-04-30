@@ -1,0 +1,32 @@
+body{
+  padding-top:80px;
+  word-wrap:break-word;
+}
+img{
+  height: 200px;
+}
+.hidden{
+  display:none;
+}
+
+body{
+  background: url(img/Where\ words\ fail\,\ music\ speaks..svg)
+}
+
+.row,.page-header{
+  color:white;
+  background: rgba(0, 0, 0, 0.442);
+  border-radius: 5px;
+}
+
+.records{
+  color:black;
+
+
+}
+
+.login{
+  background:white;
+  width:75%;
+  border-radius:5px;
+}

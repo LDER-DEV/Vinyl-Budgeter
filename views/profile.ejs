@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-record"></span><%= user.local.email %>'s Profile</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+          <h3>Record List</h3>
+          <ul class="list-group recordinfo">
+          <% for(var i=0; i< recordinfo.length; i++){
+            if (user.local.email === recordinfo[i].name) { %>
+            <li class="list-group-item records">
+              <span class="hidden"><%= recordinfo[i].name %></span>
+              <span>|Album Title:</span>
+              <span><%= recordinfo[i].album %></span>
+              <span>|Artist Title:</span>
+              <span><%= recordinfo[i].artist %></span>
+              <span> |Purchase Link:</span>
+              <span><a href="<%= recordinfo[i].link %>"><%= recordinfo[i].link %></a></span>
+              <span>|Cost:</span>
+              <span>$<%= recordinfo[i].cost %></span>
+              <img src="<%= recordinfo[i].image %>"></img>
+              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+            </li>
+          <% }
+        } %> 
+          </ul>
+
+          <h2>Enter your Record info</h2>
+        <% if (user.local.email) { %>
+          <form action="/recordinfo" method="POST">
+            <input type="text" value="<%= user.local.email %>" name="name" class="hidden">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Album Name" name="album" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Artist" name="artist" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Drop a purchase link" name="link" >
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Image link" name="image" >
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" placeholder="Cost $" name="cost" step=".01" required >
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <% } %>
+
+        <div class="col-sm-6">
+          <h2>Enter your Budget</h2>
+          <% if (user.local.email) { %>
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <span id="budget" contenteditable="true" class="form-control"><%= user.local.budget %></span>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="check"><i class="fa fa-check" aria-hidden="true"></i></button>
+              </span>
+            </div>
+          <% } %>
+        </div>
+    </div>
+
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>
